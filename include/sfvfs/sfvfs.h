@@ -21,7 +21,7 @@ struct sfvfs_fs {
  * @return              文件系统结构体
  */
 extern struct sfvfs_fs*
-sfvfs_openfs(const char* filename, struct sfvfs_options* options);
+sfvfs_openfs (const char* filename, struct sfvfs_options* options);
 
 
 /**
@@ -32,7 +32,7 @@ sfvfs_openfs(const char* filename, struct sfvfs_options* options);
  * @return                   成功返回0, 否则返回异常号
  */
 extern int
-sfvfs_makefile(const char* filename, struct sfvfs_options* options);
+sfvfs_makefile (const char* filename, struct sfvfs_options* options);
 
 
 
@@ -45,7 +45,7 @@ sfvfs_makefile(const char* filename, struct sfvfs_options* options);
  * @return             返回一个文件指针
  */
 extern FILE*
-sfvfs_fopen(struct sfvfs_fs* fs, const char* filepath, const char* mode);
+sfvfs_fopen (struct sfvfs_fs* fs, const char* filepath, const char* mode);
 
 
 
