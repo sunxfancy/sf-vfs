@@ -1,0 +1,15 @@
+dist: trusty
+language: cpp
+git:
+  depth: 3
+
+install:
+  - sudo sh ./scripts/install_gtest.sh
+  - pip install --user codecov
+
+script:
+  - make test
+
+after_success:
+  - codecov
+
