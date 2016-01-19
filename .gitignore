@@ -30,3 +30,7 @@
 
 # Debug files
 *.dSYM/
+
+
+.clang_complete
+build/
