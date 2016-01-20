@@ -1,25 +1,4 @@
-#ifndef SFVFS_DIR_H
-#define SFVFS_DIR_H
-
-#include "sfvfs/config.h"
-
-struct sfvfs_item {
-    uint64_t id;
-    char filename[SFVFS_FILENAME_LENGTH]; /* 文件名数组 */
-};
-
-struct sfvfs_item_empty {
-    uint64_t id;
-    uint64_t next;
-};
-
-struct sfvfs_dir {
-    struct sfvfs_item list[1];
-};
-
-
-/* 结构体声明 */
-struct sfvfs_fsnode;
+#include "sfvfs/dir.h"
 
 /**
  * @brief 为当前节点初始化一个仅有‘.’和‘..’的目录，或额外添加初始化后的节点
@@ -29,7 +8,9 @@ struct sfvfs_fsnode;
  * @return                          成功返回0，否则返回异常号
  */
 extern int
-sfvfs_create_dir_file (struct sfvfs_fsnode* inode, struct sfvfs_dir* ptr);
+sfvfs_create_dir_file (struct sfvfs_fsnode* inode, struct sfvfs_dir* ptr) {
+    return 0;
+}
 
 
 
@@ -40,7 +21,9 @@ sfvfs_create_dir_file (struct sfvfs_fsnode* inode, struct sfvfs_dir* ptr);
  * @return                        对应的id，-1为不存在
  */
 extern uint64_t
-sfvfs_dir_find (const char* filename);
+sfvfs_dir_find (const char* filename) {
+    return 0;
+}
 
 
 /**
@@ -51,7 +34,9 @@ sfvfs_dir_find (const char* filename);
  * @return                     成功返回0，否则返回异常号
  */
 extern int
-sfvfs_dir_insert (const char* filename, uint64_t id);
+sfvfs_dir_insert (const char* filename, uint64_t id) {
+    return 0;
+}
 
 
 /**
@@ -61,8 +46,6 @@ sfvfs_dir_insert (const char* filename, uint64_t id);
  * @return                  成功返回0，否则返回异常号
  */
 extern int
-sfvfs_dir_del (const char* filename);
-
-
-
-#endif /* end of include guard: SFVFS_DIR_H */
+sfvfs_dir_del (const char* filename) {
+    return 0;
+}
