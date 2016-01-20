@@ -6,11 +6,12 @@ extern "C"{
 #endif
 
 #include "sfvfs/config.h"
+#include "sfvfs/container.h"
 #include <stdio.h>
 
 
 struct sfvfs_fs {
-    FILE* file; /* 打开的文件指针 */
+    struct sfvfs_container* cntr; /* 打开的文件容器 */
 
 
 
