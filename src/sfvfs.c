@@ -1,5 +1,5 @@
 #include "sfvfs/sfvfs.h"
-
+#include <stdlib.h>
 
 /**
  * @brief 打开一个文件系统
@@ -10,8 +10,28 @@
  */
 extern struct sfvfs_fs*
 sfvfs_openfs (const char* filename, struct sfvfs_options* options) {
+    struct sfvfs_fs* sfs;
 
+    sfs = (struct sfvfs_fs*) malloc(sizeof(struct sfvfs_fs));
+    sfs->file = fopen(filename, "rw+");
+
+
+
+    return sfs;
 }
+
+
+/**
+ * @brief 关闭文件系统
+ * @method voidsfvfs_closefs
+ * @param  sfs               文件系统指针
+ */
+extern void
+sfvfs_closefs (struct sfvfs_fs* sfs) {
+    fclose(sfs->file);
+    free(sfs);
+}
+
 
 
 /**
@@ -23,7 +43,10 @@ sfvfs_openfs (const char* filename, struct sfvfs_options* options) {
  */
 extern int
 sfvfs_makefile (const char* filename, struct sfvfs_options* options) {
-
+    struct sfvfs_fs* sfs;
+    sfs = sfvfs_openfs(filename, options);
+    sfvfs_closefs(sfs);
+    return 0;
 }
 
 
@@ -39,4 +62,5 @@ sfvfs_makefile (const char* filename, struct sfvfs_options* options) {
 extern FILE*
 sfvfs_fopen (struct sfvfs_fs* fs, const char* filepath, const char* mode) {
 
+    return NULL;
 }

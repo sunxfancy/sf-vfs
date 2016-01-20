@@ -8,7 +8,13 @@ extern "C"{
 #include "sfvfs/config.h"
 #include <stdio.h>
 
+
 struct sfvfs_fs {
+    FILE* file; /* 打开的文件指针 */
+
+
+
+    struct sfvfs_options* options; /* 文件系统的配置选项 */
 
 };
 
@@ -22,6 +28,16 @@ struct sfvfs_fs {
  */
 extern struct sfvfs_fs*
 sfvfs_openfs (const char* filename, struct sfvfs_options* options);
+
+
+/**
+ * @brief 关闭文件系统
+ * @method voidsfvfs_closefs
+ * @param  sfs               文件系统指针
+ */
+extern void
+sfvfs_closefs (struct sfvfs_fs* sfs);
+
 
 
 /**

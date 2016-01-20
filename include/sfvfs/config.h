@@ -8,18 +8,25 @@
  * TODO: 有时需要解决字节序问题, 暂时未考虑
  */
 struct sfvfs_options {
-    uint32_t magic_number;
     uint32_t block_size;
     uint32_t block_count;
     uint32_t filename_length;
-};
+    uint32_t magic_number;
+} __attribute__((__packed__));
+
+#define SFVFS_FILENAME_LENGTH 120
 
 #define SFVFS_OPTIONS_DEFAULT { \
-    0xe53fd196, /* magic_number */ \
     1024 * 8, /* block_size */ \
     128, /* block_count */ \
-    120 /* filename_length */ \
+    SFVFS_FILENAME_LENGTH /* filename_length */ \
+    0xe53fd196, /* magic_number */ \
 }
+
+
+
+
+
 
 
 

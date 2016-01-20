@@ -8,8 +8,7 @@ release:
 
 ci:
 	- mkdir build
-	- cd build && cmake -DCMAKE_BUILD_TYPE=Release -DCOVERAGE_FLAG=ON
-
+	- cd build && cmake -DCMAKE_BUILD_TYPE=Release -DCOVERAGE_FLAG=ON && make
 
 .PHONY:
 clean:

@@ -5,7 +5,11 @@
 
 struct sfvfs_fsnode {
     uint64_t id;
-    char filename[0];
+    uint64_t data_size;
+    uint64_t mtime;
+    uint64_t open_count;
+
+    uint64_t data_list[16];
 };
 
 
