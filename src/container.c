@@ -4,6 +4,8 @@
 #include <fcntl.h> // for open
 #include <unistd.h> // for close
 #include <sys/mman.h>
+#include <sys/stat.h>
+
 
 struct sfvfs_container {
     int fd;
@@ -30,6 +32,14 @@ sfvfs_cclose (struct sfvfs_container* cntr) {
     free(cntr);
 }
 
+
+extern int
+sfvfs_size (struct sfvfs_container* cntr) {
+    struct stat st;
+    int r = fstat(cntr->fd, &st);
+    if (r == -1) return -1;
+    return st.st_size;
+}
 
 extern struct sfvfs_fimage*
 sfvfs_cread (struct sfvfs_container* cntr, int pos, int length) {

@@ -31,8 +31,8 @@ struct sfvfs_options {
 #define SFVFS_OPTIONS_DEFAULT { \
     1024 * 8, /* block_size */ \
     128, /* block_count */ \
-    SFVFS_FILENAME_LENGTH /* filename_length */ \
     0xe53fd196, /* magic_number */ \
+    SFVFS_FILENAME_LENGTH /* filename_length */ \
 }
 
 

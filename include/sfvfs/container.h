@@ -23,6 +23,9 @@ sfvfs_copen (const char* filename);
 extern void
 sfvfs_cclose (struct sfvfs_container* cntr);
 
+extern int
+sfvfs_size (struct sfvfs_container* cntr);
+
 
 extern struct sfvfs_fimage*
 sfvfs_cread (struct sfvfs_container* cntr, int pos, int length);

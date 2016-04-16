@@ -13,7 +13,13 @@ struct sfvfs_fs {
     struct sfvfs_container* cntr; /* 打开的文件容器 */
     struct sfvfs_options* options; /* 文件系统的配置选项(用户输入的期望选项) */
     struct sfvfs_header* header; /* 文件系统的头部指针 */
+    struct sfvfs_fimage* header_fimg;
 };
+
+
+#define RENAME_STRUCT(name) typedef struct name name
+RENAME_STRUCT(sfvfs_fs);
+RENAME_STRUCT(sfvfs_options);
 
 
 /**

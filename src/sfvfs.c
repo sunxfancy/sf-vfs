@@ -14,6 +14,11 @@ sfvfs_openfs (const char* filename, struct sfvfs_options* options) {
     sfs = (struct sfvfs_fs*) malloc(sizeof(struct sfvfs_fs));
     sfs->cntr = sfvfs_copen(filename);
     sfs->options = options;
+
+    if (sfvfs_size(sfs->cntr) == 0) { // 对于刚刚创建的文件系统,需要初始化
+
+    }
+
     sfs->header = sfvfs_read_header(sfs, NULL);
 
     return sfs;

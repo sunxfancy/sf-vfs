@@ -15,7 +15,7 @@ include_directories(
 
 file(GLOB_RECURSE source_files ${CMAKE_CURRENT_SOURCE_DIR}/src/*.c)
 file(GLOB_RECURSE main_file ${CMAKE_CURRENT_SOURCE_DIR}/src/main.c)
-list(REMOVE_ITEM source_files main_file)
+list(REMOVE_ITEM source_files ${CMAKE_CURRENT_SOURCE_DIR}/src/main.c)
 
 
 SET (CMAKE_CXX_COMPILER_ENV_VAR "clang")
@@ -31,7 +31,7 @@ endif()
 
 add_library(sfvfs_lib ${source_files})
 add_executable(sfvfs ${main_file})
-link_libraries(sfvfs sfvfs_lib)
+target_link_libraries(sfvfs sfvfs_lib)
 
 add_subdirectory(doc)
-# add_subdirectory(test)
+add_subdirectory(test)

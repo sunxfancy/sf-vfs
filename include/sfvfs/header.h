@@ -19,6 +19,10 @@ struct sfvfs_header {
 struct sfvfs_fs;
 
 
+extern void
+sfvfs_init_header (struct sfvfs_fs * sfs);
+
+
 /**
  * @brief 读取当前文件系统的header
  * @method intsfvfs_read_header
