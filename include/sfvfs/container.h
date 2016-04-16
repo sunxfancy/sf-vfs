@@ -17,7 +17,7 @@ struct sfvfs_fimage {
 
 
 extern struct sfvfs_container*
-sfvfs_copen (const char* filename, const char* mode);
+sfvfs_copen (const char* filename);
 
 
 extern void
@@ -37,11 +37,10 @@ sfvfs_cwrite (struct sfvfs_container* cntr, struct sfvfs_fimage* image);
  * @method sfvfs_fopen
  * @param  ctr         文件系统容器指针
  * @param  filepath    文件在内部文件系统中的路径
- * @param  mode        打开选项, 类似fopen
  * @return             返回一个文件指针
  */
 extern int
-sfvfs_fopen (struct sfvfs_container* ctr, const char* filepath, const char* mode);
+sfvfs_fopen (struct sfvfs_container* ctr, const char* filepath);
 
 
 

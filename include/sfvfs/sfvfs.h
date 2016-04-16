@@ -7,15 +7,12 @@ extern "C"{
 
 #include "sfvfs/config.h"
 #include "sfvfs/container.h"
-
+#include "sfvfs/header.h"
 
 struct sfvfs_fs {
     struct sfvfs_container* cntr; /* 打开的文件容器 */
-
-
-
-    struct sfvfs_options* options; /* 文件系统的配置选项 */
-
+    struct sfvfs_options* options; /* 文件系统的配置选项(用户输入的期望选项) */
+    struct sfvfs_header* header; /* 文件系统的头部指针 */
 };
 
 

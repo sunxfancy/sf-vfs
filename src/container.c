@@ -12,11 +12,12 @@ struct sfvfs_container {
 
 
 extern struct sfvfs_container*
-sfvfs_copen (const char* filename, const char* mode) {
+sfvfs_copen (const char* filename) {
     struct sfvfs_container* ctr;
     ctr = (struct sfvfs_container*) malloc(sizeof(struct sfvfs_container));
     ctr->filepath = NULL;
-    sfvfs_fopen(ctr, filename, mode);
+    int ret = sfvfs_fopen(ctr, filename);
+    if (ret == -1) { free(ctr); return NULL; }
     return ctr;
 }
 
@@ -68,7 +69,7 @@ static char* cpystr(const char* str) {
  * @return             返回一个文件指针
  */
 extern int
-sfvfs_fopen (struct sfvfs_container* ctr, const char* filepath, const char* mode) {
+sfvfs_fopen (struct sfvfs_container* ctr, const char* filepath) {
     ctr->fd = open(filepath, O_RDWR|O_CREAT|O_APPEND, 0666);
     if (ctr->fd == -1) return -1;
     ctr->filepath = cpystr(filepath);

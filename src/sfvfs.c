@@ -12,8 +12,9 @@ extern struct sfvfs_fs*
 sfvfs_openfs (const char* filename, struct sfvfs_options* options) {
     struct sfvfs_fs* sfs;
     sfs = (struct sfvfs_fs*) malloc(sizeof(struct sfvfs_fs));
-    
-
+    sfs->cntr = sfvfs_copen(filename);
+    sfs->options = options;
+    sfs->header = sfvfs_read_header(sfs, NULL);
 
     return sfs;
 }
@@ -26,9 +27,11 @@ sfvfs_openfs (const char* filename, struct sfvfs_options* options) {
  */
 extern void
 sfvfs_closefs (struct sfvfs_fs* sfs) {
-
+    sfvfs_cclose(sfs->cntr);
     free(sfs);
 }
+
+
 
 
 

@@ -1,6 +1,7 @@
 
 #include "sfvfs/header.h"
 #include "sfvfs/sfvfs.h"
+#include <stdlib.h>
 
 /**
  * @brief 读取当前文件系统的header
@@ -8,10 +9,12 @@
  * @param  header               文件头指针
  * @return                      成功返回0, 否则返回异常号
  */
-extern int
+extern struct sfvfs_header*
 sfvfs_read_header (struct sfvfs_fs* sfs, struct sfvfs_header* header) {
-
-    return 0;
+    struct sfvfs_fimage* header_img = sfvfs_cread(sfs->cntr, 0, sizeof(struct sfvfs_header));
+    if (!header) return (struct sfvfs_header*) (header_img->data);
+    memcpy(header, header_img->data, sizeof(struct sfvfs_header));
+    return header;
 }
 
 

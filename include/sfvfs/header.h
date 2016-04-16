@@ -23,10 +23,10 @@ struct sfvfs_fs;
  * @brief 读取当前文件系统的header
  * @method intsfvfs_read_header
  * @param  sfs                  文件系统指针
- * @param  header               文件头指针
- * @return                      成功返回0, 否则返回异常号
+ * @param  header               文件头指针(传NULL会直接将原始映射地址取出来)
+ * @return                      成功返回地址, 否则返回NULL
  */
-extern int
+extern struct sfvfs_header *
 sfvfs_read_header (struct sfvfs_fs * sfs, struct sfvfs_header * header);
 
 
