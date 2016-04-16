@@ -22,5 +22,5 @@ __MainTest__(Construction)
 	printf("MainTest for construction\n");
 
 	sfvfs_options opts = SFVFS_OPTIONS_DEFAULT;
-	sfvfs_makefile("./data", &opts);
+	sfvfs_makefile("vfs.dat", &opts);
 }

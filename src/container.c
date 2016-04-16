@@ -43,9 +43,13 @@ sfvfs_size (struct sfvfs_container* cntr) {
 
 extern struct sfvfs_fimage*
 sfvfs_cread (struct sfvfs_container* cntr, int pos, int length) {
-    struct sfvfs_fimage* fimg;
-    fimg = (struct sfvfs_fimage*) malloc(sizeof(struct sfvfs_fimage));
-    fimg->data = mmap(NULL, length, PROT_READ|PROT_WRITE, MAP_SHARED, cntr->fd, pos);
+    void* data = mmap(NULL, length, PROT_READ|PROT_WRITE, MAP_SHARED, cntr->fd, pos);
+    if (!data) { printf("mmap failed!\n"); return NULL; }
+
+    struct sfvfs_fimage* fimg = (struct sfvfs_fimage*) malloc(sizeof(struct sfvfs_fimage));
+    fimg->data = data;
+    fimg->pos = pos;
+    fimg->length = length;
     return fimg;
 }
 
@@ -80,7 +84,7 @@ static char* cpystr(const char* str) {
  */
 extern int
 sfvfs_fopen (struct sfvfs_container* ctr, const char* filepath) {
-    ctr->fd = open(filepath, O_RDWR|O_CREAT|O_TRUNC, 0666);
+    ctr->fd = open(filepath, O_RDWR|O_CREAT, 0666);
     if (ctr->fd == -1) return -1;
     ctr->filepath = cpystr(filepath);
     return ctr->fd;

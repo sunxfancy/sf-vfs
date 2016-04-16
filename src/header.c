@@ -2,17 +2,16 @@
 #include "sfvfs/header.h"
 #include "sfvfs/sfvfs.h"
 #include <string.h>
-#include <assert.h>
 
 extern void
 sfvfs_init_header (struct sfvfs_fs * sfs) {
     struct sfvfs_header* sh = sfvfs_read_header(sfs, NULL);
-    assert(sfs->options != NULL);
     memcpy(&(sh->option), sfs->options, sizeof(struct sfvfs_options));
     sh->version = 1;
-    sh->block_count = 0;
+    sh->block_count = sfs->options->block_count;
+    sh->block_sum_size = sh->block_count * sfs->options->block_size;
+    sh->file_sum_size = sizeof(struct sfvfs_header);
 
-    sfs->header = sh;
 }
 
 /**
@@ -26,7 +25,7 @@ sfvfs_read_header (struct sfvfs_fs* sfs, struct sfvfs_header* header) {
     struct sfvfs_fimage* header_img = sfvfs_cread(sfs->cntr, 0, sizeof(struct sfvfs_header));
     sfs->header_fimg = header_img;
     sfs->header = (struct sfvfs_header*) (header_img->data);
-    if (!header) return sfs->header;
+    if (header == NULL) return sfs->header;
     memcpy(header, header_img->data, sizeof(struct sfvfs_header));
     return header;
 }
@@ -40,13 +39,9 @@ sfvfs_read_header (struct sfvfs_fs* sfs, struct sfvfs_header* header) {
  */
 extern int
 sfvfs_save_header (struct sfvfs_fs* sfs, struct sfvfs_header* header) {
-    if (!header)
-        sfvfs_cwrite(sfs->cntr, sfs->header_fimg);
-    else {
+    if (header != NULL)
         memcpy(sfs->header, header, sizeof(struct sfvfs_header));
-        sfvfs_cwrite(sfs->cntr, sfs->header_fimg);
-    }
-    return 0;
+    return sfvfs_cwrite(sfs->cntr, sfs->header_fimg);
 }
 
 

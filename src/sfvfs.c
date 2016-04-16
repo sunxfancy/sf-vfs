@@ -18,10 +18,12 @@ sfvfs_openfs (const char* filename, struct sfvfs_options* options) {
     if (sfvfs_size(sfs->cntr) == 0) { // 对于刚刚创建的文件系统,需要初始化
         sfvfs_resize(sfs->cntr, sizeof(struct sfvfs_header));
         sfvfs_init_header(sfs);
+        printf("sfvfs header init done\n");
     } else {
         sfs->header = sfvfs_read_header(sfs, NULL);
-    }
+        printf("sfvfs header found\n");
 
+    }
     return sfs;
 }
 
