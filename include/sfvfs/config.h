@@ -14,8 +14,20 @@ struct sfvfs_options {
     uint32_t magic_number;
 } __attribute__((__packed__));
 
+
+/**
+ * 文件系统中文件名的最大长度
+ */
 #define SFVFS_FILENAME_LENGTH 120
 
+/**
+ * 文件系统的最大深度
+ */
+#define SFVFS_MAX_DEPTH 64
+
+/**
+ * 初始化结构体
+ */
 #define SFVFS_OPTIONS_DEFAULT { \
     1024 * 8, /* block_size */ \
     128, /* block_count */ \

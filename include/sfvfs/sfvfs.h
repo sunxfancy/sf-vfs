@@ -7,7 +7,6 @@ extern "C"{
 
 #include "sfvfs/config.h"
 #include "sfvfs/container.h"
-#include <stdio.h>
 
 
 struct sfvfs_fs {
@@ -52,17 +51,6 @@ extern int
 sfvfs_makefile (const char* filename, struct sfvfs_options* options);
 
 
-
-/**
- * @brief 打开一个文件指针
- * @method sfvfs_fopen
- * @param  fs          文件系统指针
- * @param  filepath    文件在内部文件系统中的路径
- * @param  mode        打开选项, 类似fopen
- * @return             返回一个文件指针
- */
-extern FILE*
-sfvfs_fopen (struct sfvfs_fs* fs, const char* filepath, const char* mode);
 
 
 

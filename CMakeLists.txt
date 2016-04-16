@@ -2,7 +2,7 @@
 project(sfvfs)
 
 OPTION(CMAKE_BUILD_TYPE "构建类型 / Build Type" Debug)
-OPTION(USE_DYNAMIC "使用动态库 / Build with dynamic libraries." OFF)
+OPTION(BUILD_SHARED_LIBS "使用动态库 / Build with dynamic libraries." OFF)
 OPTION(COVERAGE_FLAG "代码覆盖率 / Code coverag. " OFF)
 
 ## 配置输出目录
@@ -14,6 +14,8 @@ include_directories(
 )
 
 file(GLOB_RECURSE source_files ${CMAKE_CURRENT_SOURCE_DIR}/src/*.c)
+file(GLOB_RECURSE main_file ${CMAKE_CURRENT_SOURCE_DIR}/src/main.c)
+list(REMOVE_ITEM source_files main_file)
 
 
 SET (CMAKE_CXX_COMPILER_ENV_VAR "clang")
@@ -27,7 +29,9 @@ else()
 	SET (CMAKE_CXX_FLAGS "-std=c99")
 endif()
 
-add_library(sfvfs STATIC ${source_files})
+add_library(sfvfs_lib ${source_files})
+add_executable(sfvfs ${main_file})
+link_libraries(sfvfs sfvfs_lib)
 
 add_subdirectory(doc)
 # add_subdirectory(test)
