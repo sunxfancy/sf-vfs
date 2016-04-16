@@ -35,6 +35,9 @@ extern int
 sfvfs_cwrite (struct sfvfs_container* cntr, struct sfvfs_fimage* image);
 
 
+extern int
+sfvfs_resize (struct sfvfs_container* cntr, int size);
+
 /**
  * @brief 打开一个文件指针
  * @method sfvfs_fopen

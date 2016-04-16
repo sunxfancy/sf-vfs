@@ -11,7 +11,7 @@
 #include <gtest/gtest.h>
 #include <sfvfs/sfvfs.h>
 #include <stdio.h>
-
+#include <exception>
 
 using namespace std;
 
@@ -20,6 +20,7 @@ using namespace std;
 __MainTest__(Construction)
 {
 	printf("MainTest for construction\n");
+
 	sfvfs_options opts = SFVFS_OPTIONS_DEFAULT;
 	sfvfs_makefile("./data", &opts);
 }

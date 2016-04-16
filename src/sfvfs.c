@@ -16,10 +16,11 @@ sfvfs_openfs (const char* filename, struct sfvfs_options* options) {
     sfs->options = options;
 
     if (sfvfs_size(sfs->cntr) == 0) { // 对于刚刚创建的文件系统,需要初始化
-
+        sfvfs_resize(sfs->cntr, sizeof(struct sfvfs_header));
+        sfvfs_init_header(sfs);
+    } else {
+        sfs->header = sfvfs_read_header(sfs, NULL);
     }
-
-    sfs->header = sfvfs_read_header(sfs, NULL);
 
     return sfs;
 }
@@ -32,6 +33,7 @@ sfvfs_openfs (const char* filename, struct sfvfs_options* options) {
  */
 extern void
 sfvfs_closefs (struct sfvfs_fs* sfs) {
+    sfvfs_save_header(sfs, NULL);
     sfvfs_cclose(sfs->cntr);
     free(sfs);
 }

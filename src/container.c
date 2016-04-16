@@ -19,7 +19,7 @@ sfvfs_copen (const char* filename) {
     ctr = (struct sfvfs_container*) malloc(sizeof(struct sfvfs_container));
     ctr->filepath = NULL;
     int ret = sfvfs_fopen(ctr, filename);
-    if (ret == -1) { free(ctr); return NULL; }
+    if (ret == -1) { printf("open file failed!\n"); free(ctr); return NULL; }
     return ctr;
 }
 
@@ -80,8 +80,18 @@ static char* cpystr(const char* str) {
  */
 extern int
 sfvfs_fopen (struct sfvfs_container* ctr, const char* filepath) {
-    ctr->fd = open(filepath, O_RDWR|O_CREAT|O_APPEND, 0666);
+    ctr->fd = open(filepath, O_RDWR|O_CREAT|O_TRUNC, 0666);
     if (ctr->fd == -1) return -1;
     ctr->filepath = cpystr(filepath);
     return ctr->fd;
+}
+
+
+extern int
+sfvfs_resize (struct sfvfs_container* cntr, int size) {
+    int ret = lseek(cntr->fd, size, SEEK_SET);
+    if (ret == -1) { printf("file resize failed!\n"); return -1; }
+    ret = write(cntr->fd, "", 1);
+    if (ret == -1) { printf("writing last byte failed!\n"); return -1; }
+    return 0;
 }
