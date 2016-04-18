@@ -2,6 +2,7 @@
 #define SFVFS_HEADER_H
 
 #include "sfvfs/config.h"
+#include <stdbool.h>
 
 
 struct sfvfs_header {
@@ -18,9 +19,24 @@ struct sfvfs_header {
 /* 前向声明结构体 */
 struct sfvfs_fs;
 
-
+/**
+ * @brief 初始化header, 仅仅应该在文件新被创立时调用一次
+ * @method voidsfvfs_init_header
+ * @param  sfs                   文件系统指针
+ */
 extern void
 sfvfs_init_header (struct sfvfs_fs * sfs);
+
+
+/**
+ * @brief 检查文件系统中读取的header和用户期望的header版本是否一致
+ * @method intsfvfs_check_header
+ * @param  sfs                   文件系统指针
+ * @return                       一致返回1, 不一致返回0
+ */
+extern bool
+sfvfs_check_header (struct sfvfs_fs * sfs);
+
 
 
 /**
@@ -43,6 +59,10 @@ sfvfs_read_header (struct sfvfs_fs * sfs, struct sfvfs_header * header);
  */
 extern int
 sfvfs_save_header (struct sfvfs_fs * sfs, struct sfvfs_header * header);
+
+
+
+
 
 
 

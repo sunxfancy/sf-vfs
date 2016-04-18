@@ -1,4 +1,5 @@
 #include "sfvfs/container.h"
+#include "sfvfs/config.h"
 #include <stdlib.h>
 #include <string.h>
 #include <fcntl.h> // for open
@@ -51,6 +52,11 @@ sfvfs_cread (struct sfvfs_container* cntr, int pos, int length) {
     fimg->pos = pos;
     fimg->length = length;
     return fimg;
+}
+
+extern struct sfvfs_fimage*
+sfvfs_cread_block (struct sfvfs_container* cntr, int block_id) {
+    return sfvfs_cread(cntr, block_id * SFVFS_BLOCK_SIZE, SFVFS_BLOCK_SIZE);
 }
 
 

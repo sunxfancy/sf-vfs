@@ -25,13 +25,22 @@ struct sfvfs_options {
  */
 #define SFVFS_MAX_DEPTH 64
 
+
+#define SFVFS_BLOCK_SIZE (1024 * 8)
+
+
+#define SFVFS_BLOCK_COUNT 128
+
+
+#define SFVFS_MAGIC 0xe53fd196
+
 /**
  * 初始化结构体
  */
 #define SFVFS_OPTIONS_DEFAULT { \
-    1024 * 8, /* block_size */ \
-    128, /* block_count */ \
-    0xe53fd196, /* magic_number */ \
+    SFVFS_BLOCK_SIZE, /* block_size */ \
+    SFVFS_BLOCK_COUNT, /* block_count */ \
+    SFVFS_MAGIC, /* magic_number */ \
     SFVFS_FILENAME_LENGTH /* filename_length */ \
 }
 

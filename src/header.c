@@ -14,6 +14,14 @@ sfvfs_init_header (struct sfvfs_fs * sfs) {
 
 }
 
+extern bool
+sfvfs_check_header (struct sfvfs_fs * sfs) {
+
+    return true;
+}
+
+
+
 /**
  * @brief 读取当前文件系统的header
  * @param  sfs                  文件系统指针
