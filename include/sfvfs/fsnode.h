@@ -15,6 +15,10 @@ struct sfvfs_fsnode {
 };
 
 
+struct sfvfs_file {
+
+};
+
 
 struct sfvfs_fs;
 
@@ -23,6 +27,12 @@ sfvfs_fsnode_open(struct sfvfs_fs * sfs, struct sfvfs_fsnode * node);
 
 extern int
 sfvfs_fsnode_close(struct sfvfs_fs * sfs, int fid);
+
+extern int
+sfvfs_fsnode_read(struct sfvfs_fs * sfs, int fid, void* buffer, int len);
+
+extern int
+sfvfs_fsnode_write(struct sfvfs_fs * sfs, int fid, void* buffer, int len);
 
 extern int
 sfvfs_fsnode_find_block(struct sfvfs_fs * sfs, struct sfvfs_fsnode * node, size_t k);

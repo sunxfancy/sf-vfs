@@ -2,14 +2,15 @@
 #define SFVFS_DIR_H
 
 #include "sfvfs/config.h"
+#include "sfvfs/fsnode.h"
 
 struct sfvfs_item {
-    uint64_t id;
     char filename[SFVFS_FILENAME_LENGTH]; /* 文件名数组 */
+    struct sfvfs_fsnode node;
 };
 
 struct sfvfs_item_empty {
-    uint64_t id;
+    uint64_t empty;
     uint64_t next;
 };
 
@@ -17,9 +18,6 @@ struct sfvfs_dir {
     struct sfvfs_item list[1];
 };
 
-
-/* 结构体声明 */
-struct sfvfs_fsnode;
 
 /**
  * @brief 为当前节点初始化一个仅有‘.’和‘..’的目录，或额外添加初始化后的节点
@@ -41,6 +39,7 @@ sfvfs_create_dir_file (struct sfvfs_fsnode* inode, struct sfvfs_dir* ptr);
  */
 extern uint64_t
 sfvfs_dir_find (const char* filename);
+
 
 
 /**

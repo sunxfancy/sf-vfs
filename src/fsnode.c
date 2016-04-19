@@ -37,3 +37,16 @@ sfvfs_fsnode_find_block(struct sfvfs_fs * sfs, struct sfvfs_fsnode * node, size_
     }
     return 0;
 }
+
+
+extern int
+sfvfs_fsnode_open(struct sfvfs_fs * sfs, struct sfvfs_fsnode * node) {
+
+    return 0;
+}
+
+extern int
+sfvfs_fsnode_close(struct sfvfs_fs * sfs, int fid) {
+
+    return 0;
+}
