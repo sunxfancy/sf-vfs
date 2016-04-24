@@ -1,5 +1,6 @@
 #include "sfvfs/container.h"
 #include "sfvfs/config.h"
+#include "sfvfs/header.h"
 #include <stdlib.h>
 #include <string.h>
 #include <fcntl.h> // for open
@@ -11,6 +12,7 @@
 struct sfvfs_container {
     int fd;
     const char* filepath;
+    size_t length;
 };
 
 
@@ -39,11 +41,13 @@ sfvfs_size (struct sfvfs_container* cntr) {
     struct stat st;
     int r = fstat(cntr->fd, &st);
     if (r == -1) return -1;
-    return st.st_size;
+    cntr->length = st.st_size;
+    return cntr->length;
 }
 
 extern struct sfvfs_fimage*
 sfvfs_cread (struct sfvfs_container* cntr, int pos, int length) {
+    if (pos+length > cntr->length) sfvfs_resize(cntr, pos+length);
     void* data = mmap(NULL, length, PROT_READ|PROT_WRITE, MAP_SHARED, cntr->fd, pos);
     if (!data) { printf("mmap failed!\n"); return NULL; }
 
@@ -56,7 +60,7 @@ sfvfs_cread (struct sfvfs_container* cntr, int pos, int length) {
 
 extern struct sfvfs_fimage*
 sfvfs_cread_block (struct sfvfs_container* cntr, int block_id) {
-    return sfvfs_cread(cntr, block_id * SFVFS_BLOCK_SIZE, SFVFS_BLOCK_SIZE);
+    return sfvfs_cread(cntr, sizeof(struct sfvfs_header) + block_id * SFVFS_BLOCK_SIZE, SFVFS_BLOCK_SIZE);
 }
 
 
@@ -99,9 +103,8 @@ sfvfs_fopen (struct sfvfs_container* ctr, const char* filepath) {
 
 extern int
 sfvfs_resize (struct sfvfs_container* cntr, int size) {
-    int ret = lseek(cntr->fd, size, SEEK_SET);
+    int ret = ftruncate(cntr->fd, size);
     if (ret == -1) { printf("file resize failed!\n"); return -1; }
-    ret = write(cntr->fd, "", 1);
-    if (ret == -1) { printf("writing last byte failed!\n"); return -1; }
+    cntr->length = size;
     return 0;
 }

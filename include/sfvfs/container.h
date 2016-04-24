@@ -39,7 +39,6 @@ extern struct sfvfs_fimage*
 sfvfs_cread_block (struct sfvfs_container* cntr, int block_id);
 
 
-
 extern int
 sfvfs_resize (struct sfvfs_container* cntr, int size);
 

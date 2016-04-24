@@ -15,9 +15,7 @@ struct sfvfs_fsnode {
 };
 
 
-struct sfvfs_file {
 
-};
 
 
 struct sfvfs_fs;
@@ -40,6 +38,8 @@ sfvfs_fsnode_find_block(struct sfvfs_fs * sfs, struct sfvfs_fsnode * node, size_
 extern int
 sfvfs_fsnode_alloc_block(struct sfvfs_fs * sfs, struct sfvfs_fsnode * node, size_t k);
 
+extern int
+sfvfs_fsnode_remove_block(struct sfvfs_fs * sfs, struct sfvfs_fsnode * node, size_t k);
 
 
 

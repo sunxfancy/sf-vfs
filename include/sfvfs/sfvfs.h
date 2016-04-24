@@ -15,8 +15,7 @@ struct sfvfs_fs {
     struct sfvfs_options* options; /* 文件系统的配置选项(用户输入的期望选项) */
     struct sfvfs_header* header; /* 文件系统的头部指针 */
     struct sfvfs_fimage* header_fimg;
-
-    struct sfvfs_fsnode* root;
+    struct sfvfs_fsnode* root; /* 根目录文件节点 */
 };
 
 

@@ -2,6 +2,7 @@
 #define SFVFS_HEADER_H
 
 #include "sfvfs/config.h"
+#include "sfvfs/fsnode.h"
 #include <stdbool.h>
 
 
@@ -13,6 +14,8 @@ struct sfvfs_header {
     uint64_t block_count; /* block的数目 */
     uint64_t file_sum_size; /* 文件实际使用的总空间 */
     uint64_t block_sum_size; /* 文件系统真实占用的空间(不考虑空洞时) */
+
+    struct sfvfs_fsnode root_node;
 } __attribute__((__packed__));
 
 

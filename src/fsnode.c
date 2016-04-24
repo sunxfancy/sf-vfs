@@ -40,6 +40,27 @@ sfvfs_fsnode_find_block(struct sfvfs_fs * sfs, struct sfvfs_fsnode * node, size_
 
 
 extern int
+sfvfs_fsnode_alloc_block(struct sfvfs_fs * sfs, struct sfvfs_fsnode * node, size_t k) {
+
+    return 0;
+}
+
+
+extern int
+sfvfs_fsnode_remove_block(struct sfvfs_fs * sfs, struct sfvfs_fsnode * node, size_t k) {
+
+    return 0;
+}
+
+
+
+struct sfvfs_file {
+
+};
+
+
+
+extern int
 sfvfs_fsnode_open(struct sfvfs_fs * sfs, struct sfvfs_fsnode * node) {
 
     return 0;
@@ -59,13 +80,6 @@ sfvfs_fsnode_read(struct sfvfs_fs * sfs, int fid, void* buffer, int len) {
 
 extern int
 sfvfs_fsnode_write(struct sfvfs_fs * sfs, int fid, void* buffer, int len) {
-
-    return 0;
-}
-
-
-extern int
-sfvfs_fsnode_alloc_block(struct sfvfs_fs * sfs, struct sfvfs_fsnode * node, size_t k) {
 
     return 0;
 }

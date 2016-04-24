@@ -11,7 +11,6 @@ sfvfs_init_header (struct sfvfs_fs * sfs) {
     sh->block_count = sfs->options->block_count;
     sh->block_sum_size = sh->block_count * sfs->options->block_size;
     sh->file_sum_size = sizeof(struct sfvfs_header);
-
 }
 
 extern bool
@@ -33,6 +32,7 @@ sfvfs_read_header (struct sfvfs_fs* sfs, struct sfvfs_header* header) {
     struct sfvfs_fimage* header_img = sfvfs_cread(sfs->cntr, 0, sizeof(struct sfvfs_header));
     sfs->header_fimg = header_img;
     sfs->header = (struct sfvfs_header*) (header_img->data);
+    sfs->root = &(sfs->header->root_node);
     if (header == NULL) return sfs->header;
     memcpy(header, header_img->data, sizeof(struct sfvfs_header));
     return header;
