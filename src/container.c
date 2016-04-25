@@ -13,6 +13,7 @@ struct sfvfs_container {
     int fd;
     const char* filepath;
     size_t length;
+    size_t block_number;
 };
 
 
@@ -60,7 +61,8 @@ sfvfs_cread (struct sfvfs_container* cntr, int pos, int length) {
 
 extern struct sfvfs_fimage*
 sfvfs_cread_block (struct sfvfs_container* cntr, int block_id) {
-    return sfvfs_cread(cntr, sizeof(struct sfvfs_header) + block_id * SFVFS_BLOCK_SIZE, SFVFS_BLOCK_SIZE);
+    if (cntr->block_number < block_id) cntr->block_number = block_id;
+    return sfvfs_cread(cntr, block_id * SFVFS_BLOCK_SIZE, SFVFS_BLOCK_SIZE);
 }
 
 

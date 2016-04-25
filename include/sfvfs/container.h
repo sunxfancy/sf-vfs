@@ -12,7 +12,7 @@ struct sfvfs_container;
 struct sfvfs_fimage {
     void* data;
     int pos;  /* 在文件中的位置 */
-    int length; /* 长度 */
+    size_t length; /* 长度 */
 };
 
 

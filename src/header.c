@@ -29,7 +29,7 @@ sfvfs_check_header (struct sfvfs_fs * sfs) {
  */
 extern struct sfvfs_header*
 sfvfs_read_header (struct sfvfs_fs* sfs, struct sfvfs_header* header) {
-    struct sfvfs_fimage* header_img = sfvfs_cread(sfs->cntr, 0, sizeof(struct sfvfs_header));
+    struct sfvfs_fimage* header_img = sfvfs_cread_block(sfs->cntr, 0);
     sfs->header_fimg = header_img;
     sfs->header = (struct sfvfs_header*) (header_img->data);
     sfs->root = &(sfs->header->root_node);
